@@ -27,9 +27,18 @@ async function run() {
         await client.connect();
 
         const classCollection = client.db("danceClubdb").collection("classes");
+        const selectedClassCollection = client.db("danceClubdb").collection("selectedClasses");
 
         app.get('/classes', async(req, res) => {
             const result = await classCollection.find().toArray();
+            res.send(result);
+        })
+
+        // selected classes
+        app.post('/selectedClasses', async(req, res) => {
+            const selected = req.body ;
+            console.log(selected);
+            const result = await selectedClassCollection.insertOne(selected);
             res.send(result);
         })
 
