@@ -116,7 +116,7 @@ async function run() {
             res.send(result);
         })
 
-        app.post('/classes', async(req, res) => {
+        app.post('/classes',verifyJWT,verifyAdmin, async(req, res) => {
             const newClass = req.body ;
             const result = await classCollection.insertOne(newClass);
             res.send(result);
