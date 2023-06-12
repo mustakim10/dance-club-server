@@ -116,6 +116,12 @@ async function run() {
             res.send(result);
         })
 
+        app.post('/classes', async(req, res) => {
+            const newClass = req.body ;
+            const result = await classCollection.insertOne(newClass);
+            res.send(result);
+        })
+
         // selected classes apis
 
         app.get('/selectedClasses',verifyJWT, async(req, res) => {
